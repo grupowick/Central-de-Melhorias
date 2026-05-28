@@ -1,821 +1,457 @@
 <!DOCTYPE html>
-
 <html lang="pt-br">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Portal de Excelência Operacional</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
     <style>
-
         /* CONFIGURAÇÕES GERAIS COM A NOVA PALETA (ROXO, VERDE, LARANJA) */
-
         * { box-sizing: border-box; }
-
         body {
-
-            margin: -45px 0 0 0; /* Empurra a página para cima, escondendo o banner do Google */
-
+            margin: 0;
             padding: 40px 20px;
-
             background-color: #f97316;
-
             font-family: 'Lato', sans-serif;
-
             color: #f8fafc;
-
             display: flex;
-
             justify-content: center;
-
         }
-
-
 
         .container {
-
             width: 100%;
-
             max-width: 1000px;
-
             background-color: #a855f7;
-
             padding: 40px;
-
             border-radius: 24px;
-
             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6);
-
             border: 1px solid #3c3263;
-
         }
-
-
 
         /* ANIMAÇÕES */
-
         @keyframes fadeIn {
-
             from { opacity: 0; transform: translateY(20px); }
-
             to { opacity: 1; transform: translateY(0); }
-
         }
-
-
 
         .animated-item {
-
             animation: fadeIn 0.8s ease forwards;
-
         }
-
-
 
         /* CORES E TEXTOS */
-
         h1, h2, h3 {
-
             font-family: 'Poppins', sans-serif;
-
             color: #fff;
-
             margin: 0;
-
         }
-
-
 
         h1 {
-
             font-size: 36px;
-
             font-weight: 700;
-
             background: linear-gradient(to right, #a855f7, #f97316); /* Gradiente Roxo para Laranja */
-
             -webkit-background-clip: text;
-
             -webkit-text-fill-color: transparent;
-
             margin-bottom: 10px;
-
         }
-
-
 
         p {
-
             color: #b4b0cc;
-
             font-size: 16px;
-
             line-height: 1.6;
-
             margin-bottom: 30px;
-
         }
-
-
 
         /* HERO BANNER COM SUA FOTO */
-
         .hero-banner {
-
             width: 100%;
-
             height: 250px;
-
             border-radius: 16px;
-
             overflow: hidden;
-
             position: relative;
-
             margin-bottom: 40px;
-
             border: 1px solid #4c3e7a;
-
         }
-
-
 
         .hero-banner img {
-
             width: 100%;
-
             height: 100%;
-
             object-fit: cover;
-
             filter: brightness(0.5); /* Escurece levemente a foto para o texto destacar */
-
             transition: transform 0.5s ease;
-
         }
-
-
 
         .hero-banner:hover img {
-
             transform: scale(1.03);
-
         }
-
-
 
         .hero-text {
-
             position: absolute;
-
             top: 50%;
-
             left: 5%;
-
             transform: translateY(-50%);
-
         }
-
-
 
         /* FORMULÁRIO ESTILIZADO */
-
         .form-group {
-
             margin-bottom: 25px;
-
         }
-
-
 
         label {
-
             display: block;
-
             font-weight: 600;
-
             margin-bottom: 8px;
-
             color: #cbd5e1;
-
             font-size: 15px;
-
         }
-
-
 
         input[type="text"], input[type="email"], select, textarea {
-
             width: 100%;
-
             padding: 14px 16px;
-
             background-color: #120e24;
-
             border: 2px solid #3c3263;
-
             border-radius: 12px;
-
             color: #fff;
-
             font-family: 'Lato', sans-serif;
-
             font-size: 16px;
-
             transition: all 0.3s ease;
-
         }
-
-
 
         input:focus, select:focus, textarea:focus {
-
             outline: none;
-
             border-color: #a855f7; /* Foco Roxo */
-
             box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.2);
-
         }
-
-
 
         /* BOTÃO DE ENVIO - LARANJA VIBRANTE */
-
         .btn-submit {
-
             width: 100%;
-
             background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-
             color: white;
-
             padding: 16px;
-
             border: none;
-
             border-radius: 12px;
-
             font-size: 18px;
-
             font-weight: 600;
-
             font-family: 'Poppins', sans-serif;
-
             cursor: pointer;
-
             box-shadow: 0 10px 20px -5px rgba(249, 115, 22, 0.4);
-
             transition: all 0.3s ease;
-
         }
-
-
 
         .btn-submit:hover {
-
             transform: translateY(-2px);
-
             box-shadow: 0 15px 25px -5px rgba(249, 115, 22, 0.5);
-
         }
-
-       
-
+        
         .btn-submit:disabled {
-
             background: #4b4861;
-
             cursor: not-allowed;
-
             transform: none;
-
             box-shadow: none;
-
         }
-
-
 
         /* DASHBOARD (GRÁFICOS E TABELA) */
-
         .dashboard-grid {
-
             display: grid;
-
             grid-template-columns: 1fr 1fr;
-
             gap: 20px;
-
             margin-top: 50px;
-
             border-top: 1px solid #3c3263;
-
             padding-top: 40px;
-
         }
 
-
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
 
         .card {
-
             background-color: #120e24;
-
             padding: 25px;
-
             border-radius: 16px;
-
             border: 1px solid #3c3263;
-
         }
-
-
 
         .chart-placeholder {
-
             display: flex;
-
             flex-direction: column;
-
             gap: 12px;
-
             margin-top: 20px;
-
         }
-
-
 
         .bar-row {
-
             display: flex;
-
             align-items: center;
-
             gap: 15px;
-
         }
-
-
 
         .bar-label { width: 100px; font-size: 14px; color: #b4b0cc; text-transform: uppercase; }
-
         .bar-track { flex-grow: 1; height: 10px; background-color: #2a244d; border-radius: 6px; overflow: hidden; }
-
         .bar-fill { height: 100%; background: linear-gradient(90deg, #a855f7, #22c55e); border-radius: 6px; width: 0%; transition: width 0.8s ease-out; } /* Preenchimento Roxo para Verde */
 
-
-
         /* TABELA */
-
         table {
-
             width: 100%;
-
             border-collapse: collapse;
-
             margin-top: 15px;
-
             font-size: 14px;
-
         }
-
-
 
         th { text-align: left; padding: 12px; color: #7c75a3; font-weight: 600; border-bottom: 1px solid #3c3263; }
-
         td { padding: 12px; color: #cbd5e1; border-bottom: 1px solid #1e1b38; }
 
-
-
         /* CORES DO SEUS STATUS SOLICITADOS */
-
         .status {
-
             padding: 5px 10px;
-
             border-radius: 6px;
-
             font-size: 12px;
-
             font-weight: bold;
-
         }
-
         /* Aprovada -> Verde */
-
         .status-aprovada { background-color: rgba(34, 197, 94, 0.2); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.4); }
-
         /* Em Análise -> Amarelo */
-
         .status-analise { background-color: rgba(234, 179, 8, 0.2); color: #eab308; border: 1px solid rgba(234, 179, 8, 0.4); }
-
         /* Em Verificação -> Laranja */
-
         .status-verificacao { background-color: rgba(249, 115, 22, 0.2); color: #f97316; border: 1px solid rgba(249, 115, 22, 0.4); }
-
         /* Qualquer outro caso genérico */
-
         .status-padrao { background-color: rgba(168, 85, 247, 0.2); color: #a855f7; }
-
     </style>
-
 </head>
-
 <body>
 
-
-
     <div class="container animated-item">
-
-       
-
+        
         <div class="hero-banner">
-
             <img src="https://i.postimg.cc/pVc3hJgp/Design-sem-nome-(40).png" alt="Foto de Cabeçalho">
-
             <div class="hero-text">
-
                 <h1>Portal de Ideias & Melhorias</h1>
-
                 <p style="margin: 0; color: #cbd5e1;">Sua visão transforma nossos processos</p>
-
             </div>
-
         </div>
-
-
 
         <form id="formMelhoria">
-
-           
-
+            
             <div class="form-group">
-
                 <label for="email">Endereço de e-mail *</label>
-
                 <input type="email" id="email" required placeholder="seu.email@empresa.com">
-
             </div>
 
-
-
             <div class="form-group">
-
                 <label for="nome">Nome *</label>
-
                 <input type="text" id="nome" required placeholder="Digite seu nome">
-
             </div>
 
-
-
             <div class="form-group">
-
                 <label for="setor">Seu Setor / Departamento *</label>
-
                 <select id="setor" required>
-
                     <option value="" disabled selected>Selecione seu setor...</option>
-
                     <option value="COMERCIAL">COMERCIAL</option>
-
                     <option value="BKO 1">BKO 1</option>
-
-                    <option value="BKO 2">BKO 2</option> <option value="FINANCEIRO">FINANCEIRO</option>
-
+                    <option value="BKO 2">BKO 2</option> 
+                    <option value="FINANCEIRO">FINANCEIRO</option>
                     <option value="MARKETING">MARKETING</option>
-
                     <option value="SAC">SAC</option>
-
                     <option value="OUTRA ÁREA">OUTRA ÁREA</option>
-
                 </select>
-
             </div>
 
-
+            <div class="form-group">
+                <label for="processo">Qual número do processo ou procedimento atual você deseja sugerir melhoria/correção? (Apenas 4 dígitos) *</label>
+                <input 
+                    type="text" 
+                    id="processo" 
+                    required 
+                    inputmode="numeric"
+                    pattern="[0-9]{4}" 
+                    maxlength="4" 
+                    placeholder="Ex: 0123, se for inclusão digite 0000"
+                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                >
+            </div>
 
             <div class="form-group">
-    <label for="processo">Qual número do processo ou procedimento atual você deseja sugerir melhoria/correção? (Apenas 4 dígitos) *</label>
-    <input 
-        type="text" 
-        id="processo" 
-        required 
-        inputmode="numeric"
-        pattern="[0-9]{4}" 
-        maxlength="4" 
-        placeholder="Ex: 0123, se for inclusão digite 0000"
-        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-    >
-       </div>
-
-
-
-            <div class="form-group">
-
                 <label for="problema">Qual é o problema ou gargalo encontrado no formato atual? *</label>
-
                 <textarea id="problema" rows="4" required placeholder="Descreva o que atualmente gera atrasos, erros ou dificuldades..."></textarea>
-
             </div>
-
-
 
             <div class="form-group">
-
                 <label for="solucao">Qual é a sua proposta de solução ou nova ideia? *</label>
-
                 <textarea id="solucao" rows="4" required placeholder="Explique detalhadamente como o processo deveria funcionar na sua visão..."></textarea>
-
             </div>
-
-
 
             <button type="button" class="btn-submit" onclick="enviarDados()">Enviar Proposta de Melhoria</button>
-
         </form>
 
-
-
         <div class="dashboard-grid">
-
-           
-
+            
             <div class="card">
-
                 <h3>Sugestões por Setor</h3>
-
                 <div class="chart-placeholder">
-
                     <div class="bar-row">
-
                         <span class="bar-label">Comercial</span>
-
                         <div class="bar-track"><div id="barraCOMERCIAL" class="bar-fill" style="width: 0%;"></div></div>
-
                     </div>
-
                     <div class="bar-row">
-
                         <span class="bar-label">bko 1</span>
-
                         <div class="bar-track"><div id="barraBKO1" class="bar-fill" style="width: 0%;"></div></div>
-
                     </div>
-
                     <div class="bar-row">
-
                         <span class="bar-label">bko 2</span>
-
                         <div class="bar-track"><div id="barraBKO2" class="bar-fill" style="width: 0%;"></div></div>
-
                     </div>
-
                     <div class="bar-row">
-
                         <span class="bar-label">Financeiro</span>
-
                         <div class="bar-track"><div id="barraFINANCEIRO" class="bar-fill" style="width: 0%;"></div></div>
-
                     </div>
-
                     <div class="bar-row">
-
                         <span class="bar-label">mkt</span>
-
                         <div class="bar-track"><div id="barraMARKETING" class="bar-fill" style="width: 0%;"></div></div>
-
                     </div>
-
                     <div class="bar-row">
-
                         <span class="bar-label">sac</span>
-
                         <div class="bar-track"><div id="barraSAC" class="bar-fill" style="width: 0%;"></div></div>
-
                     </div>
-
                     <div class="bar-row">
-
                         <span class="bar-label">outros</span>
-
                         <div class="bar-track"><div id="barraOUTROS" class="bar-fill" style="width: 0%;"></div></div>
-
                     </div>
-
                 </div>
-
             </div>
-
-
 
             <div class="card">
-
                 <h3>Últimos Status</h3>
-
                 <table>
-
                     <thead>
-
                         <tr>
-
                             <th>Processo</th>
-
                             <th>Status</th>
-
                         </tr>
-
                     </thead>
-
                     <tbody id="corpoTabelaStatus">
-
                         <tr>
-
                             <td colspan="2" style="color: #7c75a3;">Carregando informações do painel...</td>
-
                         </tr>
-
                     </tbody>
-
                 </table>
-
             </div>
-
-
 
         </div>
-
-
 
     </div>
 
-
-
     <script>
+        // Substitua pelo seu link gerado ao implantar no Google Apps Script (/exec)
+        const URL_GOOGLE_SCRIPT = "https://script.google.com/macros/s/AKfycbwmlEG7I0miOWoUl2JsMhvX8A9UhDQeyydooFv7dsaRTPgA3ijcPc-Kc-4tRkZEDYAZ6Q/exec";
 
         window.onload = function() {
-
             atualizarDashboardReal();
-
         };
 
-
-
         function atualizarDashboardReal() {
-
-            google.script.run.withSuccessHandler(function(dadosPlanilha) {
-
-               
-
-                // Atualiza Gráficos
-
-                document.getElementById('barraCOMERCIAL').style.width = (dadosPlanilha.graficos.comercial || 0) + '%';
-
-                document.getElementById('barraBKO1').style.width = (dadosPlanilha.graficos.bko1 || 0) + '%';
-
-                document.getElementById('barraBKO2').style.width = (dadosPlanilha.graficos.bko2 || 0) + '%';
-
-                document.getElementById('barraFINANCEIRO').style.width = (dadosPlanilha.graficos.financeiro || 0) + '%';
-
-                document.getElementById('barraMARKETING').style.width = (dadosPlanilha.graficos.mkt || 0) + '%';
-
-                document.getElementById('barraSAC').style.width = (dadosPlanilha.graficos.sac || 0) + '%';
-
-                document.getElementById('barraOUTROS').style.width = (dadosPlanilha.graficos.outros || 0) + '%';
-
-               
-
-                // Atualiza Tabela com as regras de cores pedidas
-
-                let corpoTabela = document.getElementById('corpoTabelaStatus');
-
-                corpoTabela.innerHTML = "";
-
-               
-
-                if(dadosPlanilha.tabela.length === 0) {
-
-                    corpoTabela.innerHTML = "<tr><td colspan='2' style='color: #7c75a3;'>Nenhuma sugestão enviada ainda.</td></tr>";
-
-                    return;
-
-                }
-
-
-
-                dadosPlanilha.tabela.forEach(function(item) {
-
-                    let statusTexto = item.status ? item.status.trim() : "Em Análise";
-
-                    let classeStatus = "status-padrao";
-
-                   
-
-                    // Condicionais exatas para os seus status e cores desejados
-
-                    if (statusTexto.toLowerCase() === "aprovada" || statusTexto.toLowerCase() === "aprovado") {
-
-                        classeStatus = "status-aprovada"; // Verde
-
-                    } else if (statusTexto.toLowerCase() === "em análise" || statusTexto.toLowerCase() === "em analise") {
-
-                        classeStatus = "status-analise"; // Amarelo
-
-                    } else if (statusTexto.toLowerCase() === "Em atualização" || statusTexto.toLowerCase() === "Em atualização") {
-
-                        classeStatus = "status-verificacao"; // Laranja
-
+            fetch(URL_GOOGLE_SCRIPT)
+                .then(response => response.json())
+                .then(dadosPlanilha => {
+                    // Atualiza Gráficos
+                    document.getElementById('barraCOMERCIAL').style.width = (dadosPlanilha.graficos.comercial || 0) + '%';
+                    document.getElementById('barraBKO1').style.width = (dadosPlanilha.graficos.bko1 || 0) + '%';
+                    document.getElementById('barraBKO2').style.width = (dadosPlanilha.graficos.bko2 || 0) + '%';
+                    document.getElementById('barraFINANCEIRO').style.width = (dadosPlanilha.graficos.financeiro || 0) + '%';
+                    document.getElementById('barraMARKETING').style.width = (dadosPlanilha.graficos.mkt || 0) + '%';
+                    document.getElementById('barraSAC').style.width = (dadosPlanilha.graficos.sac || 0) + '%';
+                    document.getElementById('barraOUTROS').style.width = (dadosPlanilha.graficos.outros || 0) + '%';
+                    
+                    // Atualiza Tabela com as regras de cores pedidas
+                    let cuerpoTabela = document.getElementById('corpoTabelaStatus');
+                    cuerpoTabela.innerHTML = "";
+                    
+                    if(!dadosPlanilha.tabela || dadosPlanilha.tabela.length === 0) {
+                        cuerpoTabela.innerHTML = "<tr><td colspan='2' style='color: #7c75a3;'>Nenhuma sugestão enviada ainda.</td></tr>";
+                        return;
                     }
 
+                    dadosPlanilha.tabela.forEach(function(item) {
+                        let statusTexto = item.status ? item.status.trim() : "Em Análise";
+                        let classeStatus = "status-padrao";
+                        let statusLimpo = statusTexto.toLowerCase();
+                        
+                        // Condicionais exatas para os seus status e cores desejados
+                        if (statusLimpo === "aprovada" || statusLimpo === "aprovado") {
+                            classeStatus = "status-aprovada"; // Verde
+                        } else if (statusLimpo === "em análise" || statusLimpo === "em analise") {
+                            classeStatus = "status-analise"; // Amarelo
+                        } else if (statusLimpo === "em atualização" || statusLimpo === "em atualizacao") {
+                            classeStatus = "status-verificacao"; // Laranja
+                        }
 
-
-                    let linha = `<tr>
-
-                        <td>${item.processo}</td>
-
-                        <td><span class="status ${classeStatus}">${statusTexto}</span></td>
-
-                    </tr>`;
-
-                    corpoTabela.innerHTML += linha;
-
+                        let linha = `<tr>
+                            <td>${item.processo}</td>
+                            <td><span class="status ${classeStatus}">${statusTexto}</span></td>
+                        </tr>`;
+                        cuerpoTabela.innerHTML += linha;
+                    });
+                })
+                .catch(err => {
+                    console.error("Erro ao buscar dados:", err);
+                    document.getElementById('corpoTabelaStatus').innerHTML = "<tr><td colspan='2' style='color: #ef4444;'>Erro ao carregar o painel.</td></tr>";
                 });
-
-
-
-            }).obterDadosDashboard();
-
         }
-
-
 
         function enviarDados() {
-
-            const dadosForm = {
-
-                email: document.getElementById('email').value,
-
-                nome: document.getElementById('nome').value,
-
-                setor: document.getElementById('setor').value,
-
-                processo: document.getElementById('processo').value,
-
-                problema: document.getElementById('problema').value,
-
-                solucao: document.getElementById('solucao').value
-
-            };
-
-           
-
-            if(!dadosForm.email || !dadosForm.nome || !dadosForm.setor || !dadosForm.processo || !dadosForm.problema || !dadosForm.solucao) {
-
-                alert("Por favor, preencha todos os campos obrigatórios.");
-
+            const campoProcesso = document.getElementById('processo');
+            
+            // Força a validação nativa de 4 dígitos criada no HTML
+            if (!campoProcesso.checkValidity()) {
+                alert("Por favor, insira o número do processo com exatamente 4 dígitos numéricos.");
+                campoProcesso.focus();
                 return;
-
             }
 
-
+            const dadosForm = {
+                email: document.getElementById('email').value,
+                nome: document.getElementById('nome').value,
+                setor: document.getElementById('setor').value,
+                processo: campoProcesso.value,
+                problema: document.getElementById('problema').value,
+                solucao: document.getElementById('solucao').value
+            };
+            
+            if(!dadosForm.email || !dadosForm.nome || !dadosForm.setor || !dadosForm.processo || !dadosForm.problema || !dadosForm.solucao) {
+                alert("Por favor, preencha todos os campos obrigatórios.");
+                return;
+            }
 
             const botao = document.querySelector('.btn-submit');
-
             botao.disabled = true;
-
             botao.innerText = "Registrando na Planilha...";
 
-
-
-            google.script.run.withSuccessHandler(function() {
-
-                alert("Muito obrigado, " + dadosForm.nome + "! Sua proposta foi enviada.");
-
-                document.getElementById('formMelhoria').reset();
-
+            // Envia requisição externa para o Google Apps Script rodando em segundo plano
+            fetch(URL_GOOGLE_SCRIPT, {
+                method: "POST",
+                body: JSON.stringify(dadosForm)
+            })
+            .then(response => response.json())
+            .then(resposta => {
+                if(resposta.status === "success") {
+                    alert("Muito obrigado, " + dadosForm.nome + "! Sua proposta foi enviada.");
+                    document.getElementById('formMelhoria').reset();
+                    atualizarDashboardReal();
+                } else {
+                    alert("Ocorreu um erro no script do Google: " + resposta.message);
+                }
+            })
+            .catch(err => {
+                alert("Erro de conexão ao enviar dados. Verifique a publicação do Script.");
+                console.error(err);
+            })
+            .finally(() => {
                 botao.disabled = false;
-
                 botao.innerText = "Enviar Proposta de Melhoria";
-
-                atualizarDashboardReal();
-
-            }).salvarSugestao(dadosForm);
-
+            });
         }
-
     </script>
-
 </body>
-
-</html> 
+</html>
