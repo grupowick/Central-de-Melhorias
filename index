@@ -233,7 +233,7 @@
             </div>
         </div>
 
-        <form id="formMelhoria">
+        <form id="formMelhoria" onsubmit="enviarDados(event)">
             
             <div class="form-group">
                 <label for="email">Endereço de e-mail *</label>
@@ -283,7 +283,7 @@
                 <textarea id="solucao" rows="4" required placeholder="Explique detalhadamente como o processo deveria funcionar na sua visão..."></textarea>
             </div>
 
-            <button type="button" class="btn-submit" onclick="enviarDados()">Enviar Proposta de Melhoria</button>
+            <button type="submit" class="btn-submit">Enviar Proposta de Melhoria</button>
         </form>
 
         <div class="dashboard-grid">
@@ -344,7 +344,6 @@
     </div>
 
     <script>
-        // Substitua pelo seu link gerado ao implantar no Google Apps Script (/exec)
         const URL_GOOGLE_SCRIPT = "https://script.google.com/macros/s/AKfycbwmlEG7I0miOWoUl2JsMhvX8A9UhDQeyydooFv7dsaRTPgA3ijcPc-Kc-4tRkZEDYAZ6Q/exec";
 
         window.onload = function() {
@@ -378,7 +377,6 @@
                         let classeStatus = "status-padrao";
                         let statusLimpo = statusTexto.toLowerCase();
                         
-                        // Condicionais exatas para os seus status e cores desejados
                         if (statusLimpo === "aprovada" || statusLimpo === "aprovado") {
                             classeStatus = "status-aprovada"; // Verde
                         } else if (statusLimpo === "em análise" || statusLimpo === "em analise") {
@@ -400,10 +398,11 @@
                 });
         }
 
-        function enviarDados() {
+        function enviarDados(event) {
+            event.preventDefault(); // Evita recarregar a pagina
+            
             const campoProcesso = document.getElementById('processo');
             
-            // Força a validação nativa de 4 dígitos criada no HTML
             if (!campoProcesso.checkValidity()) {
                 alert("Por favor, insira o número do processo com exatamente 4 dígitos numéricos.");
                 campoProcesso.focus();
@@ -418,17 +417,11 @@
                 problema: document.getElementById('problema').value,
                 solucao: document.getElementById('solucao').value
             };
-            
-            if(!dadosForm.email || !dadosForm.nome || !dadosForm.setor || !dadosForm.processo || !dadosForm.problema || !dadosForm.solucao) {
-                alert("Por favor, preencha todos os campos obrigatórios.");
-                return;
-            }
 
             const botao = document.querySelector('.btn-submit');
             botao.disabled = true;
             botao.innerText = "Registrando na Planilha...";
 
-            // Envia requisição externa para o Google Apps Script rodando em segundo plano
             fetch(URL_GOOGLE_SCRIPT, {
                 method: "POST",
                 body: JSON.stringify(dadosForm)
